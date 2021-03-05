@@ -6,7 +6,15 @@
 
 #IncludeRegexTransform: 
 
-C:/SandBox/Bataille-Navale/Bataille-Navale_v1.c
+C:/SandBox/Bataille-Navale/Bataille-Navale_v0.1.c
 stdio.h
+-
+stdlib.h
+-
+windows.h
+-
+conio.h
+-
+time.h
 -
 

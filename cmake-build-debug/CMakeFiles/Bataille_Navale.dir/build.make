@@ -76,27 +76,27 @@ include CMakeFiles/Bataille_Navale.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Bataille_Navale.dir/flags.make
 
-CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.obj: CMakeFiles/Bataille_Navale.dir/flags.make
-CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.obj: ../Bataille-Navale_v1.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\SandBox\Bataille-Navale\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Bataille_Navale.dir\Bataille-Navale_v1.c.obj   -c C:\SandBox\Bataille-Navale\Bataille-Navale_v1.c
+CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.obj: CMakeFiles/Bataille_Navale.dir/flags.make
+CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.obj: ../Bataille-Navale_v0.1.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\SandBox\Bataille-Navale\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Bataille_Navale.dir\Bataille-Navale_v0.1.c.obj   -c C:\SandBox\Bataille-Navale\Bataille-Navale_v0.1.c
 
-CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\SandBox\Bataille-Navale\Bataille-Navale_v1.c > CMakeFiles\Bataille_Navale.dir\Bataille-Navale_v1.c.i
+CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\SandBox\Bataille-Navale\Bataille-Navale_v0.1.c > CMakeFiles\Bataille_Navale.dir\Bataille-Navale_v0.1.c.i
 
-CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\SandBox\Bataille-Navale\Bataille-Navale_v1.c -o CMakeFiles\Bataille_Navale.dir\Bataille-Navale_v1.c.s
+CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\SandBox\Bataille-Navale\Bataille-Navale_v0.1.c -o CMakeFiles\Bataille_Navale.dir\Bataille-Navale_v0.1.c.s
 
 # Object files for target Bataille_Navale
 Bataille_Navale_OBJECTS = \
-"CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.obj"
+"CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.obj"
 
 # External object files for target Bataille_Navale
 Bataille_Navale_EXTERNAL_OBJECTS =
 
-Bataille_Navale.exe: CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.c.obj
+Bataille_Navale.exe: CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.obj
 Bataille_Navale.exe: CMakeFiles/Bataille_Navale.dir/build.make
 Bataille_Navale.exe: CMakeFiles/Bataille_Navale.dir/linklibs.rsp
 Bataille_Navale.exe: CMakeFiles/Bataille_Navale.dir/objects1.rsp
