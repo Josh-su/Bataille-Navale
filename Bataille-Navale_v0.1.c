@@ -4,63 +4,21 @@
 #include <conio.h>
 #include <time.h>
 
-int NomUtilisateur, Tire, NbTire=0,coordone=1, choix, i, ii, line, column;
-char axeX, axeY;
-int JEU(){
-    system("cls");
-    printf("╔══A═══B═══C═══D═══E═══F═══G═══H═══I═══J══╗\n1");
-    for (int i = 0; i < 10; ++i) {
-        for (int j = 0; j < 10; ++j) {
-            if (i!=9) {
-                printf("  ▓▓");
-            }else{
-                printf(" ▓▓ ");
-            }
-        }
-        if (i!=9) {
-            coordone++;
-            printf(" ║\n║");
-            for (int j = 0; j < 41; ++j) {
-                printf(" ");
-            }
-            printf("║\n%d", coordone);
-        }else{
-            printf("║\n╚");
-            for (int k = 0; k < 41; ++k) {
-                printf("═");
-            }
-        }
-    }
-    printf("╝\n(A-J) : ");
-    scanf("%c",&axeX);
-    printf("(1-10) : ");
-    scanf("%c",&axeY);
-
-    scanf("%d",&Tire);
-//    if (Tire==1||Tire==2||Tire==3||Tire==4||Tire==5) {
-//        printf("touche!");
-//    }
-//    if(Tire==2){
-//        printf("touche coule!");
-//    }
-//    if(Tire==0){
-//        printf("Plouf!");
-//    }
-}
-void clearBuffer();
+int NbTire=0, choix, i, ii, axeX, axeY, ToucheMax;
+char lettre;
 char tableShips [2][10][10] =
         {
                 {
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'},
+                        {'~','~','~','~','~','~','~','~','~','~'}
                 },
                 {
                         { '#', 'A', '#', '#', '#', '#', '#', '#', '#', '#' },
@@ -75,42 +33,11 @@ char tableShips [2][10][10] =
                         { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' }
                 }
         };
-int shipsPlace [2] = {0,0};
 void color(int front, int back)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), back*16 + front);
 }
-void startBoard(int board[][5])
-{
-    for(line=0 ; line < 5 ; line++ )
-        for(column=0 ; column < 5 ; column++ )
-            board[line][column]=-1;
-}
-void showBoard(int board[][5])
-{
-    color(15,0);
-    printf("   ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐\n");
-    printf("   │ A │ B │ C │ D │ E │ F │ G │ H │ I │ J │\n");
-    printf("┌──┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤\n");
-    for(line=0 ; line < 5 ; line++ ){
-        printf("%d", line + 1);
-        for(column=0 ; column < 5 ; column++ ){
-            if(board[line][column] == -1){
-                color(15,1);
-                printf("│ ~ │");
-                color(15,0);
-            }else if(board[line][column] == 0){
-                color(15,1);
-                printf("\t*");
-                color(15,0);
-            }else if(board[line][column] == 1){
-                printf("\tX");
-            }
-        }
-        printf("\n");
-    }
-}
-void drawGrid (int playerturn)
+void drawGrid ()
 {
     system("cls");
     color(15,0);
@@ -126,21 +53,27 @@ void drawGrid (int playerturn)
         }
         for(ii = 0; ii < 10; ii++)
         {
-            if(tableShips [playerturn][i][ii] == '#')
+            if(axeY==i&&axeX==ii) {
+                if (tableShips[1][i][ii] == 'A'
+                    || tableShips[1][i][ii] == 'B'
+                    || tableShips[1][i][ii] == 'C'
+                    || tableShips[1][i][ii] == 'D'
+                    || tableShips[1][i][ii] == 'E') {
+                    color(15, 4);
+                    printf("  %c  ", tableShips[1][i][ii]);
+                    color(15, 0);
+                    printf("│");
+                    ToucheMax++;
+                } else {
+                    color(15,2);
+                    printf("  %c  ", tableShips[1][i][ii]);
+                    color(15,0);
+                    printf("│");
+                }
+            }else if(tableShips [0][i][ii] == '~')
             {
                 color(15,1);
-                printf("  %c  ", tableShips[playerturn][i][ii]);
-                color(15,0);
-                printf("│");
-            }
-            if(tableShips [playerturn][i][ii] == 'A'
-            ||tableShips [playerturn][i][ii] == 'B'
-            ||tableShips [playerturn][i][ii] == 'C'
-            ||tableShips [playerturn][i][ii] == 'D'
-            ||tableShips [playerturn][i][ii] == 'E')
-            {
-                color(15,4);
-                printf("  %c  ", tableShips [playerturn][i][ii]);
+                printf("  %c  ", tableShips[0][i][ii]);
                 color(15,0);
                 printf("│");
             }
@@ -153,12 +86,28 @@ void drawGrid (int playerturn)
     }
 }
 int Play(){
-    drawGrid(0);
-    printf("(A-J) : ");
-    scanf("%c",&axeX);
-    printf("(1-10) : ");
-    scanf("%c",&axeY);
-    NbTire++;
+    do{
+        drawGrid();
+        printf("Veuilez choisir un colonne (A-J) : ");
+        fflush(stdin);
+        scanf("%c",&lettre);
+        if (lettre=='A'||lettre=='a') axeX=0;
+        if (lettre=='B'||lettre=='b') axeX=1;
+        if (lettre=='C'||lettre=='c') axeX=2;
+        if (lettre=='D'||lettre=='d') axeX=3;
+        if (lettre=='E'||lettre=='e') axeX=4;
+        if (lettre=='F'||lettre=='f') axeX=5;
+        if (lettre=='G'||lettre=='g') axeX=6;
+        if (lettre=='H'||lettre=='h') axeX=7;
+        if (lettre=='I'||lettre=='i') axeX=8;
+        if (lettre=='J'||lettre=='j') axeX=9;
+        printf("veuillez choisir une ligne (1-10) : ");
+        fflush(stdin);
+        scanf("%d",&axeY);
+        axeY=axeY-1;
+        NbTire++;
+    } while (ToucheMax!=17);
+    printf("Tu a tiré %d",NbTire);
 }
 int SCORES(){
     system("cls");
@@ -191,7 +140,7 @@ int OPTIONS(){
     choix = 0;
     system("pause");
 }
-int goToMenu (int menuChoice) {
+int goToMenu () {
     do {
         system("cls");
         printf("\n                                                                             ____         _          _  _ _        _   _                  _"
@@ -235,7 +184,6 @@ int goToMenu (int menuChoice) {
 }
 int main()
 {
-    int menuChoice = 0;
     SetConsoleOutputCP(65001);
     color(15,0);
     goToMenu(0);
