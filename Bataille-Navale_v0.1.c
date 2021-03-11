@@ -2,47 +2,12 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
+#include <time.h>
 
-int NomUtilisateur, Tire, NbTire;
-int Score(int argc, char *argv[]){
-    FILE* fichier = NULL;
-    fichier = fopen("Logs+Scores/Scores.txt", "w");
-    if (fichier != NULL)
-    {
-        // On demande le pseudo
-        printf("veuiller écrire votre pseudo");
-        scanf("%d",&NomUtilisateur);
-        // On l'écrit dans le fichier
-        fprintf(fichier, "Le Monsieur qui utilise le programme alias %c a fini en %d tires",NomUtilisateur,NbTire);
-        fclose(fichier);
-    }
-    return 0;
-}
-int Scores()
-{
-    system("cls");
-    FILE* fichier = NULL;
-    int score[100] = {0}; // Tableau des 100 derniers scores
-    fichier = fopen("C:\\SandBox\\Bataille-Navale\\Logs+Scores/Scores.txt", "r");
-    if (fichier != NULL)
-    {
-        printf("Les scores sont :");
-        for (int x = 0; x < 100; ++x) {
-            fseek(fichier, 0, SEEK_END);
-            fscanf(fichier, "%d", &score[x]);
-            printf("\n- %d",score[x]);
-        }
-        fclose(fichier);
-    }else{
-        printf("erreur");
-    }
-    return 0;
-}
+int NomUtilisateur, Tire, NbTire=0,coordone=1, choix, i, ii, line, column;
 char axeX, axeY;
-int coordone=1;
 int JEU(){
     system("cls");
-    //(grilles/grille0.txt)
     printf("╔══A═══B═══C═══D═══E═══F═══G═══H═══I═══J══╗\n1");
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
@@ -82,105 +47,197 @@ int JEU(){
 //        printf("Plouf!");
 //    }
 }
+void clearBuffer();
+char tableShips [2][10][10] =
+        {
+                {
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
+                },
+                {
+                        { '#', 'A', '#', '#', '#', '#', '#', '#', '#', '#' },
+                        { '#', 'A', '#', '#', '#', '#', '#', '#', '#', '#' },
+                        { '#', '#', '#', '#', '#', '#', '#', '#', 'D', '#' },
+                        { '#', '#', '#', '#', '#', '#', '#', '#', 'D', '#' },
+                        { '#', '#', 'B', 'B', 'B', '#', '#', '#', 'D', '#' },
+                        { '#', '#', '#', '#', '#', '#', '#', '#', 'D', '#' },
+                        { '#', '#', 'E', 'E', 'E', 'E', 'E', '#', '#', '#' },
+                        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+                        { '#', '#', 'C', 'C', 'C', '#', '#', '#', '#', '#' },
+                        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' }
+                }
+        };
+int shipsPlace [2] = {0,0};
+void color(int front, int back)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), back*16 + front);
+}
+void startBoard(int board[][5])
+{
+    for(line=0 ; line < 5 ; line++ )
+        for(column=0 ; column < 5 ; column++ )
+            board[line][column]=-1;
+}
+void showBoard(int board[][5])
+{
+    color(15,0);
+    printf("   ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐\n");
+    printf("   │ A │ B │ C │ D │ E │ F │ G │ H │ I │ J │\n");
+    printf("┌──┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤\n");
+    for(line=0 ; line < 5 ; line++ ){
+        printf("%d", line + 1);
+        for(column=0 ; column < 5 ; column++ ){
+            if(board[line][column] == -1){
+                color(15,1);
+                printf("│ ~ │");
+                color(15,0);
+            }else if(board[line][column] == 0){
+                color(15,1);
+                printf("\t*");
+                color(15,0);
+            }else if(board[line][column] == 1){
+                printf("\tX");
+            }
+        }
+        printf("\n");
+    }
+}
+void drawGrid (int playerturn)
+{
+    system("cls");
+    color(15,0);
+    printf("   ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐\n");
+    printf("   │  A  │  B  │  C  │  D  │  E  │  F  │  G  │  H  │  I  │  J  │\n");
+    printf("┌──┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤\n");
+    for(i = 0; i < 10; i++)
+    {
+        if (i!=9) {
+            printf("│%x │", i+1);
+        }else{
+            printf("│10│");
+        }
+        for(ii = 0; ii < 10; ii++)
+        {
+            if(tableShips [playerturn][i][ii] == '#')
+            {
+                color(15,1);
+                printf("  %c  ", tableShips[playerturn][i][ii]);
+                color(15,0);
+                printf("│");
+            }
+            if(tableShips [playerturn][i][ii] == 'A'
+            ||tableShips [playerturn][i][ii] == 'B'
+            ||tableShips [playerturn][i][ii] == 'C'
+            ||tableShips [playerturn][i][ii] == 'D'
+            ||tableShips [playerturn][i][ii] == 'E')
+            {
+                color(15,4);
+                printf("  %c  ", tableShips [playerturn][i][ii]);
+                color(15,0);
+                printf("│");
+            }
+        }
+        if (i!=9) {
+            printf("\n├──┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤\n");
+        }else{
+            printf("\n└──┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘\n");
+        }
+    }
+}
+int Play(){
+    drawGrid(0);
+    printf("(A-J) : ");
+    scanf("%c",&axeX);
+    printf("(1-10) : ");
+    scanf("%c",&axeY);
+    NbTire++;
+}
+int SCORES(){
+    system("cls");
+    printf("\n\n         Travaille en cour\n\n         ");
+    choix = 0;
+    system("pause");
+}
 int RULES() {
     system("cls");
-    printf("REGLE\n");
-    printf("Votre flotte a 5 bateaux qui sont les suivant:\n");
-    printf("-1 porte-avion(5 cases)\n");
-    printf("-1 croiseur(4 cases)\n");
-    printf("-1 contre-torpilleur(3 cases)\n");
-    printf("-1 sous-marin(3 cases)\n");
-    printf("-1 torpilleur (2 cases)\n");
-    printf("Les bateaux ne sont pas colles entre eux.\n");
-    printf("La grille est numerotee de 1 a 10 verticalement\n");
-    printf("et de A a J horizontalement. Vous allez \"tirer\"\n");
-    printf("sur une case de l'adversaire: exemple, B.3. le but est\n");
-    printf("donc de couler les bateaux adverses.\n");
-    printf("Au fur et a mesure des marqueurs serons affiche afin de se\n");
-    printf("souvenir de vos tirs passes.\n");
+    printf("\n       RÈGLES\n\n");
+    printf("       Votre flotte a 5 bateaux qui sont les suivant:\n");
+    printf("       -1 porte-avion(5 cases)\n");
+    printf("       -1 croiseur(4 cases)\n");
+    printf("       -1 contre-torpilleur(3 cases)\n");
+    printf("       -1 sous-marin(3 cases)\n");
+    printf("       -1 torpilleur (2 cases)\n");
+    printf("       Les bateaux ne sont pas colles entre eux.\n");
+    printf("       La grille est numerotee de 1 a 10 verticalement\n");
+    printf("       et de A a J horizontalement. Vous allez \"tirer\"\n");
+    printf("       sur une case de l'adversaire: exemple, B.3. le but est\n");
+    printf("       donc de couler les bateaux adverses.\n");
+    printf("       Au fur et a mesure des marqueurs serons affiche afin de se\n");
+    printf("       souvenir de vos tirs passes.\n\n       ");
     system("pause");
     return(0);
 }
-int choix;
-void menuprincipal(void){
-    do {
-        system("cls");
-        printf("\n                                                                                          ____        _        _ _ _        _   _                  _ "
-               "\n                                                                                         | __ )  __ _| |_ __ _(_) | | ___  | \\ | | __ ___   ____ _| |"
-               "\n                                                                                         |  _ \\ / _` | __/ _` | | | |/ _ \\ |  \\| |/ _` \\ \\ / / _` | |"
-               "\n                                                                                         | |_) | (_| | || (_| | | | |  __/ | |\\  | (_| |\\ V / (_| | |"
-               "\n                                                                                         |____/ \\__,_|\\__\\__,_|_|_|_|\\___| |_| \\_|\\__,_| \\_/ \\__,_|_|"
-               "\n"
-               "\n"
-               "\n"
-               "\n"
-               "\n                                                                                      __  __                    ____       _            _             _"
-               "\n                                                                                     |  \\/  | ___ _ __  _   _  |  _ \\ _ __(_)_ __   ___(_)_ __   __ _| |"
-               "\n                                                                                     | |\\/| |/ _ \\ '_ \\| | | | | |_) | '__| | '_ \\ / __| | '_ \\ / _` | |"
-               "\n                                                                                     | |  | |  __/ | | | |_| | |  __/| |  | | | | | (__| | |_) | (_| | |"
-               "\n                                                                                     |_|  |_|\\___|_| |_|\\__,_| |_|   |_|  |_|_| |_|\\___|_| .__/ \\__,_|_|"
-               "\n                                                                                                                                         |_|            "
-               "\n"
-               "\n                                                                                                   _               _                       "
-               "\n                                                                                                  / |             | | ___  _   _  ___ _ __ "
-               "\n                                                                                                  | |  _____   _  | |/ _ \\| | | |/ _ \\ '__|"
-               "\n                                                                                                  | | |_____| | |_| | (_) | |_| |  __/ |   "
-               "\n                                                                                                  |_|          \\___/ \\___/ \\__,_|\\___|_|"
-               "\n                                                                                                ____            ____                          "
-               "\n                                                                                               |___ \\          / ___|  ___ ___  _ __ ___  ___ "
-               "\n                                                                                                 __) |  _____  \\___ \\ / __/ _ \\| '__/ _ \\/ __|"
-               "\n                                                                                                / __/  |_____|  ___) | (_| (_) | | |  __/\\__ \\"
-               "\n                                                                                               |_____|         |____/ \\___\\___/|_|  \\___||___/"
-               "\n                                                                                                 _____           ____            _           "
-               "\n                                                                                                |___ /          |  _ \\ ___  __ _| | ___  ___ "
-               "\n                                                                                                  |_ \\   _____  | |_) / _ \\/ _` | |/ _ \\/ __|"
-               "\n                                                                                                 ___) | |_____| |  _ <  __/ (_| | |  __/\\__ \\"
-               "\n                                                                                                |____/          |_| \\_\\___|\\__, |_|\\___||___/"
-               "\n                                                                                                                            |___/             "
-               "\n                                                                                             _  _              ___        _   _                 "
-               "\n                                                                                            | || |            / _ \\ _ __ | |_(_) ___  _ __  ___ "
-               "\n                                                                                            | || |_   _____  | | | | '_ \\| __| |/ _ \\| '_ \\/ __|"
-               "\n                                                                                            |__   _| |_____| | |_| | |_) | |_| | (_) | | | \\__ \\"
-               "\n                                                                                               |_|            \\___/| .__/ \\__|_|\\___/|_| |_|___/"
-               "\n                                                                                                                    |_|                          "
-               "\n                                                                                                ____             ___        _ _   _            "
-               "\n                                                                                               | ___|           / _ \\ _   _(_) |_| |_ ___ _ __ "
-               "\n                                                                                               |___ \\   _____  | | | | | | | | __| __/ _ \\ '__|"
-               "\n                                                                                                ___) | |_____| | |_| | |_| | | |_| ||  __/ |   "
-               "\n                                                                                               |____/           \\__\\_\\\\__,_|_|\\__|\\__\\___|_|");
-        printf("\n\t\t Indiquez votre choix : ") ;
-        scanf("%d",&choix);
-        switch(choix)
-        {
-            case 1 :
-                JEU();
-                choix=0;
-            break;
-            case 2 :
-                Scores();
-                choix=0;
-            break;
-            case 3 :
-                RULES();
-                choix=0;
-                break;
-            case 4 :
-                printf("OPTIONS") ;
-                choix=0;
-                break;
-            case 5 :
-                choix=0;
-                break;
-            default:break;
-        }
-    } while ((choix != '1') && (choix != '2') && (choix != '3') && (choix != '4') && (choix != '5')) ;
+int OPTIONS(){
+    system("cls");
+    printf("\n\n         Travaille en cour\n\n         ");
+    choix = 0;
     system("pause");
 }
-int main() {
-    SetConsoleOutputCP(65001);
-    //Scores();
-    menuprincipal();
-    //JEU();
+int goToMenu (int menuChoice) {
+    do {
+        system("cls");
+        printf("\n                                                                             ____         _          _  _ _        _   _                  _"
+               "\n                                                                            | __ )   __ _| |_   __ _(_)| | | ___  | \\ | | __ ___   ____ _| | ___"
+               "\n                                                                            |  _ \\  / _` | __| / _` | || | |/ _ \\ |  \\| |/ _` \\ \\ / / _` | |/ _ \\ "
+               "\n                                                                            | |_) || (_| | |_ | (_| | || | |  __/ | |\\  | (_| |\\ V / (_| | |  __/"
+               "\n                                                                            |____/  \\__,_|\\__| \\__,_|_||_|_|\\___| |_| \\_|\\__,_| \\_/ \\__,_|_|\\___|\n");
+        printf("                                                                                                        by Joshua\n\n\n");
+        printf("                                                                                                    MENU PRINCIPAL\n\n");
+        printf("\n                                                                                                      Jouer   [1]\n");
+        printf("\n                                                                                                      Scores  [2]\n");
+        printf("\n                                                                                                      Règles  [3]\n");
+        printf("\n                                                                                                      Options [4]\n");
+        printf("\n                                                                                                      Quitter [5]\n");
+        printf("\n\t\t\t\t\tIndiquez votre choix : ");
+        scanf("%d", &choix);
+        switch (choix) {
+            case 1 :
+                Play();
+                choix = 0;
+                break;
+            case 2 :
+                SCORES();
+                break;
+            case 3 :
+                RULES();
+                choix = 0;
+                break;
+            case 4 :
+                OPTIONS();
+                break;
+            case 5 :
+                system("cls");
+                choix = 0;
+                break;
+            default:
+                break;
+        }
+    } while (choix != 5);
     system("pause");
+}
+int main()
+{
+    int menuChoice = 0;
+    SetConsoleOutputCP(65001);
+    color(15,0);
+    goToMenu(0);
     return 0;
 }
