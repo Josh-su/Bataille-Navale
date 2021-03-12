@@ -13,8 +13,4 @@ stdlib.h
 -
 windows.h
 -
-conio.h
--
-time.h
--
 
