@@ -142,32 +142,32 @@ Bataille_Navale/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Bataille_Navale.dir\build.make CMakeFiles/Bataille_Navale.dir/build
 .PHONY : Bataille_Navale/fast
 
-Bataille-Navale_v0.1.obj: Bataille-Navale_v0.1.c.obj
+Bataille-Navale_v1.0.obj: Bataille-Navale_v1.0.c.obj
 
-.PHONY : Bataille-Navale_v0.1.obj
+.PHONY : Bataille-Navale_v1.0.obj
 
 # target to build an object file
-Bataille-Navale_v0.1.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Bataille_Navale.dir\build.make CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.obj
-.PHONY : Bataille-Navale_v0.1.c.obj
+Bataille-Navale_v1.0.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Bataille_Navale.dir\build.make CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.0.c.obj
+.PHONY : Bataille-Navale_v1.0.c.obj
 
-Bataille-Navale_v0.1.i: Bataille-Navale_v0.1.c.i
+Bataille-Navale_v1.0.i: Bataille-Navale_v1.0.c.i
 
-.PHONY : Bataille-Navale_v0.1.i
+.PHONY : Bataille-Navale_v1.0.i
 
 # target to preprocess a source file
-Bataille-Navale_v0.1.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Bataille_Navale.dir\build.make CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.i
-.PHONY : Bataille-Navale_v0.1.c.i
+Bataille-Navale_v1.0.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Bataille_Navale.dir\build.make CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.0.c.i
+.PHONY : Bataille-Navale_v1.0.c.i
 
-Bataille-Navale_v0.1.s: Bataille-Navale_v0.1.c.s
+Bataille-Navale_v1.0.s: Bataille-Navale_v1.0.c.s
 
-.PHONY : Bataille-Navale_v0.1.s
+.PHONY : Bataille-Navale_v1.0.s
 
 # target to generate assembly for a file
-Bataille-Navale_v0.1.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Bataille_Navale.dir\build.make CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v0.1.c.s
-.PHONY : Bataille-Navale_v0.1.c.s
+Bataille-Navale_v1.0.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Bataille_Navale.dir\build.make CMakeFiles/Bataille_Navale.dir/Bataille-Navale_v1.0.c.s
+.PHONY : Bataille-Navale_v1.0.c.s
 
 # Help Target
 help:
@@ -178,9 +178,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Bataille_Navale
-	@echo ... Bataille-Navale_v0.1.obj
-	@echo ... Bataille-Navale_v0.1.i
-	@echo ... Bataille-Navale_v0.1.s
+	@echo ... Bataille-Navale_v1.0.obj
+	@echo ... Bataille-Navale_v1.0.i
+	@echo ... Bataille-Navale_v1.0.s
 .PHONY : help
 
 

@@ -74,7 +74,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/SandBox/Bataille-Navale/Bataille-Navale_v0.1.c">
+		<Unit filename="C:/SandBox/Bataille-Navale/Bataille-Navale_v1.0.c">
 			<Option target="Bataille_Navale"/>
 		</Unit>
 		<Unit filename="C:/SandBox/Bataille-Navale/CMakeLists.txt">
