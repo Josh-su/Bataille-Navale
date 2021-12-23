@@ -10,11 +10,14 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <time.h>
+#include <conio.h>
 
 #define TAILLE_MAX 1000
 
-int NbTire, x, y, axeX, axeY, ToucheMax, touche, rate_, exit_, choix, BateauA, BateauB, BateauC, BateauD, BateauE, evenement, choix_option, choix_couleur = 1, NbScoreAffiche, couleur, couleur_grille;
-char lettre, Pseudo[30];
+int NbTire, x, y, axeX, axeY, ToucheMax, touche, rate_, exit_, choix, BateauA, BateauB, BateauC, BateauD, BateauE, evenement, choix_option, choix_couleur = 1, NbScoreAffiche, couleur, couleur_grille, choix_quitter, partie_en_cour = 0;
+
+void retourMenu();//declaration des fonctions
+char lettre, Pseudo[300];
 char tableBateaux[10][10] = //cette table represente les bateaux sur la grille
         {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -173,7 +176,7 @@ void affi_scores() {//affiche les 5 derniers scores
     system("cls");
     FILE *fichier = NULL;
     char chaine[TAILLE_MAX] = "5";
-    NbScoreAffiche=0;
+    NbScoreAffiche = 0;
     fichier = fopen("../LogsScores/Scores.txt", "r+");
     if (fichier != NULL) {
         printf(" __     __      _        _    _               ____         _                     _                                                    \n"
@@ -186,7 +189,7 @@ void affi_scores() {//affiche les 5 derniers scores
         {
             printf("\t\t-  %s", chaine); // On affiche la chaîne qu'on vient de lire
             NbScoreAffiche++;
-            if (NbScoreAffiche==5) fclose(fichier);
+            if (NbScoreAffiche == 5) fclose(fichier);
         }
     }
     printf("\n\t\t");
@@ -308,36 +311,12 @@ void toucher() {
 
 void Fin() {//affiche le pseudo de la personne qui gagner et en combien de fois elle a tire pour finir
     printf("\n\t╔═════════════════════════════════════════════════╗");
-    printf("\n\t    BRAVO %s tu as gagner en %d tires !!", Pseudo, NbTire);//affiche combien de fois tu a tire pour finir
+    printf("\n\t   BRAVO %s tu as gagner en %d tires !!", Pseudo, NbTire);//affiche combien de fois tu a tire pour finir
     printf("\n\t╚═════════════════════════════════════════════════╝\n\t   ");
     system("pause");
     evenement = 3;
     logs();
     enreg_scores();
-}
-
-int play() {//demande les coordonee et affiche si on a touche ou rater un bateau
-    clearGrid();
-    definir_grille();
-    evenement = 2;
-    logs();
-    do {
-        drawGrid();
-        healthShip();
-        toucher();
-        if (ToucheMax != 17) {//--> si pas toute les case avec un bateau on ete touche
-            printf("\tVeuilez choisir un colonne (A-J) : ");//demande la coordonee horizental
-            fflush(stdin);
-            scanf("%c", &lettre);
-            Change();
-            printf("\tveuillez choisir une ligne (1-10) : ");//demande la coordonee vertical
-            fflush(stdin);
-            scanf("%d", &axeY);
-            axeY = axeY - 1;
-            NbTire++;
-        }
-    } while (ToucheMax != 17);
-    Fin();
 }
 
 void rules() {//affiche les regle du jeu
@@ -359,11 +338,11 @@ void rules() {//affiche les regle du jeu
     system("pause");
 }
 
-void date_heure() {//sa vas chercher le jour, le mois, l'année, l'heure, la minute et la seconde actuelle et vas l'afficher
+void
+date_heure() {//sa vas chercher le jour, le mois, l'année, l'heure, la minute et la seconde actuelle et vas l'afficher
     SYSTEMTIME t;
     GetLocalTime(&t);
-    printf("\n\t\t\t\t%d.%d.%d  %d:%d:%d \n", t.wDay, t.wMonth, t.wYear, t.wHour, t.wMinute, t.wSecond);
-    printf("\t\t\t\t");
+    printf("\n %d.%d.%d  %d:%d:%d \n\n ", t.wDay, t.wMonth, t.wYear, t.wHour, t.wMinute, t.wSecond);
     system("pause");
 }
 
@@ -383,7 +362,7 @@ void changer_couleur() {
         printf(" [6] Violet\n");
         printf(" [7] Jaune\n");
         printf(" [8] Turquoise\n");
-        printf(" [9] Retour");
+        printf(" [9] Retour\n  ");
         scanf("%d", &choix_couleur);
         couleur_actuelle();
     } while (choix_couleur != 9);
@@ -393,15 +372,15 @@ void options() {
     do {
         system("cls");
         choix_option = 0;
-        printf("\t\t\t\t\t\t\t\t                _    _               \n"
-               "\t\t\t\t\t\t\t\t   ___   _ __  | |_ (_)  ___   _ __  \n"
-               "\t\t\t\t\t\t\t\t  / _ \\ | '_ \\ | __|| | / _ \\ | '_ \\ \n"
-               "\t\t\t\t\t\t\t\t | (_) || |_) || |_ | || (_) || | | |\n"
-               "\t\t\t\t\t\t\t\t  \\___/ | .__/  \\__||_| \\___/ |_| |_|\n"
-               "\t\t\t\t\t\t\t\t        |_|                          ");
-        printf("\n\n\t\t\t\t[1]  Afficher la date et l'heure\n\n");
-        printf("\t\t\t\t[2]  Changer la couleur du texte\n\n");
-        printf("\t\t\t\t[3]  Retour\n\n\t\t");
+        printf("                _    _               \n"
+               "   ___   _ __  | |_ (_)  ___   _ __  \n"
+               "  / _ \\ | '_ \\ | __|| | / _ \\ | '_ \\ \n"
+               " | (_) || |_) || |_ | || (_) || | | |\n"
+               "  \\___/ | .__/  \\__||_| \\___/ |_| |_|\n"
+               "        |_|                          ");
+        printf("\n\n [1]  Afficher la date et l'heure\n\n");
+        printf(" [2]  Changer la couleur du texte\n\n");
+        printf(" [3]  Retour\n\n\t\t");
         scanf("%d", &choix_option);
         switch (choix_option) {
             case 1:
@@ -425,6 +404,31 @@ void options() {
     } while (choix_option != 3);
 }
 
+int play() {//demande les coordonee et affiche si on a touche ou rater un bateau
+    clearGrid();
+    definir_grille();
+    evenement = 2;
+    logs();
+    do {
+        drawGrid();
+        healthShip();
+        toucher();
+        if (ToucheMax != 17) {//--> si pas toute les case avec un bateau on ete touche
+            retourMenu();
+            printf("\tVeuilez choisir un colonne (A-J) : ");//demande la coordonee horizental
+            fflush(stdin);
+            scanf("%c", &lettre);
+            Change();
+            printf("\tveuillez choisir une ligne (1-10) : ");//demande la coordonee vertical
+            fflush(stdin);
+            scanf("%d", &axeY);
+            axeY = axeY - 1;
+            NbTire++;
+        }
+    } while (ToucheMax != 17);
+    Fin();
+}
+
 int goToMenu() {//affiche le menu
     SYSTEMTIME t;
     GetLocalTime(&t);
@@ -443,6 +447,8 @@ int goToMenu() {//affiche le menu
         printf("\n                                                                                                      Règles  [3]\n");
         printf("\n                                                                                                      Options [4]\n");
         printf("\n                                                                                                      Quitter [5]\n");
+        if (partie_en_cour == 1)
+            printf("\n                                                                                                      Rejouer [6]\n");
         printf("\n\t\t\t\t\t\t\t\tIndiquez votre choix : ");
         scanf("%d", &choix);
         switch (choix) {
@@ -465,12 +471,15 @@ int goToMenu() {//affiche le menu
                 break;
             default:
                 if (choix == 6) {
-                    printf("              _         _   \n"
-                           "  ___   __ _ | | _   _ | |_ \n"
-                           " / __| / _` || || | | || __|\n"
-                           " \\__ \\| (_| || || |_| || |_ \n"
-                           " |___/ \\__,_||_| \\__,_| \\__|\n");
-                    system("pause");
+                    if (partie_en_cour == 1) {}
+                    else {
+                        printf("              _         _   \n"
+                               "  ___   __ _ | | _   _ | |_ \n"
+                               " / __| / _` || || | | || __|\n"
+                               " \\__ \\| (_| || || |_| || |_ \n"
+                               " |___/ \\__,_||_| \\__,_| \\__|\n");
+                        system("pause");
+                    }
                 } else if (choix != 5) {
                     printf("\n\t\t");
                     printf("UNKNOW VALUE!!");
@@ -482,12 +491,22 @@ int goToMenu() {//affiche le menu
     } while (choix != 5);
     printf("\n\n\n\t\t\tVeut tu vraiment quitter ? 1->NON / 2->OUI");
     scanf("%d", &exit_);
-    if (exit_ == 1) {
+    if (exit_ == 2) {
         goToMenu();
-    } else {
+    } else if (exit_ == 1) {
         evenement = 4;
         logs();
         system("exit");
+    }
+}
+
+void retourMenu() {// Définition de la fonction (code) elle sert a quitter une partie en cour
+    char k;
+    k = getch();
+    if (k == 27) {
+        printf("Veux tu vraiment retourner au menu? \nla Partie sera sauvegarder! \n1->Oui /2->Non");
+        scanf("%d", &choix_quitter);
+        if (choix_quitter == 1) goToMenu(), partie_en_cour = 1;
     }
 }
 
@@ -507,3 +526,4 @@ int main() {
     goToMenu();
     return 0;
 }
+
