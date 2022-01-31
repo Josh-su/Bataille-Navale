@@ -16,8 +16,10 @@
 
 int NbTire, x, y, axeX, axeY, ToucheMax, touche, rate_, exit_, choix, BateauA, BateauB, BateauC, BateauD, BateauE, evenement, choix_option, choix_couleur = 1, NbScoreAffiche, couleur, couleur_grille, choix_quitter, partie_en_cour = 0;
 
-void retourMenu();//declaration des fonctions
+void retourMenu(), play(), color(int front,int back), couleur_actuelle(), definir_grille(), logs(), goToMenu(), enreg_scores(), affi_scores(), enreg_pseudo(), clearGrid(), drawGrid(), Change(), toucher(), Fin(), rules(), date_heure(), changer_couleur(), options(), AskColumn(), AskLine(), fullscreen();//declaration des fonctions
+
 char lettre, Pseudo[300];
+
 char tableBateaux[10][10] = //cette table represente les bateaux sur la grille
         {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -338,8 +340,7 @@ void rules() {//affiche les regle du jeu
     system("pause");
 }
 
-void
-date_heure() {//sa vas chercher le jour, le mois, l'année, l'heure, la minute et la seconde actuelle et vas l'afficher
+void date_heure() {//sa vas chercher le jour, le mois, l'année, l'heure, la minute et la seconde actuelle et vas l'afficher
     SYSTEMTIME t;
     GetLocalTime(&t);
     printf("\n %d.%d.%d  %d:%d:%d \n\n ", t.wDay, t.wMonth, t.wYear, t.wHour, t.wMinute, t.wSecond);
@@ -404,8 +405,24 @@ void options() {
     } while (choix_option != 3);
 }
 
-int play() {//demande les coordonee et affiche si on a touche ou rater un bateau
-    clearGrid();
+void AskColumn() {
+    printf("\tVeuilez choisir un colonne (A-J) : ");//demande la coordonee horizental
+    fflush(stdin);
+    scanf("%c", &lettre);
+    Change();
+}
+
+void AskLine() {
+    printf("\tveuillez choisir une ligne (1-10) : ");//demande la coordonee vertical
+    fflush(stdin);
+    scanf("%d", &axeY);
+    axeY = axeY - 1;
+}
+
+void play() {//demande les coordonee et affiche si on a touche ou rater un bateau
+    if (partie_en_cour != 1){
+        clearGrid();
+    }
     definir_grille();
     evenement = 2;
     logs();
@@ -415,21 +432,18 @@ int play() {//demande les coordonee et affiche si on a touche ou rater un bateau
         toucher();
         if (ToucheMax != 17) {//--> si pas toute les case avec un bateau on ete touche
             retourMenu();
-            printf("\tVeuilez choisir un colonne (A-J) : ");//demande la coordonee horizental
-            fflush(stdin);
-            scanf("%c", &lettre);
-            Change();
-            printf("\tveuillez choisir une ligne (1-10) : ");//demande la coordonee vertical
-            fflush(stdin);
-            scanf("%d", &axeY);
-            axeY = axeY - 1;
+            AskColumn();
+            if (axeX >= 10)
+                AskColumn();//verifie que la donnée enregistré soit bien un numero plus petit que 10 sinon redemander
+            AskLine();
+            if (axeY >= 10) AskLine();
             NbTire++;
         }
     } while (ToucheMax != 17);
     Fin();
 }
 
-int goToMenu() {//affiche le menu
+void goToMenu() {//affiche le menu
     SYSTEMTIME t;
     GetLocalTime(&t);
     couleur_grille = 0;
@@ -443,44 +457,94 @@ int goToMenu() {//affiche le menu
         printf("                                                                                                          by moi\n\n\n");
         printf("                                                                                                    MENU PRINCIPAL\n\n");
         printf("\n                                                                                                      Jouer   [1]\n");
-        printf("\n                                                                                                      Scores  [2]\n");
-        printf("\n                                                                                                      Règles  [3]\n");
-        printf("\n                                                                                                      Options [4]\n");
-        printf("\n                                                                                                      Quitter [5]\n");
-        if (partie_en_cour == 1)
-            printf("\n                                                                                                      Rejouer [6]\n");
+        if (partie_en_cour == 1) {
+            printf("\n                                                                                                     Continuer [2]\n");
+            printf("\n                                                                                                      Scores  [3]\n");
+            printf("\n                                                                                                      Règles  [4]\n");
+            printf("\n                                                                                                      Options [5]\n");
+            printf("\n                                                                                                      Quitter [6]\n");
+        } else {
+            printf("\n                                                                                                      Scores  [2]\n");
+            printf("\n                                                                                                      Règles  [3]\n");
+            printf("\n                                                                                                      Options [4]\n");
+            printf("\n                                                                                                      Quitter [5]\n");
+        }
         printf("\n\t\t\t\t\t\t\t\tIndiquez votre choix : ");
+        fflush(stdin);
         scanf("%d", &choix);
         switch (choix) {
             case 1 :
+                partie_en_cour = 0;
                 enreg_pseudo();
                 play();
                 choix = 0;
                 break;
             case 2 :
-                affi_scores();
+                if (partie_en_cour == 1) {
+                    play();
+                } else {
+                    affi_scores();
+                }
                 choix = 0;
                 break;
             case 3 :
-                rules();
+                if (partie_en_cour == 1) {
+                    affi_scores();
+                } else {
+                    rules();
+                }
                 choix = 0;
                 break;
             case 4 :
                 options();
                 choix = 0;
                 break;
-            default:
-                if (choix == 6) {
-                    if (partie_en_cour == 1) {}
-                    else {
-                        printf("              _         _   \n"
-                               "  ___   __ _ | | _   _ | |_ \n"
-                               " / __| / _` || || | | || __|\n"
-                               " \\__ \\| (_| || || |_| || |_ \n"
-                               " |___/ \\__,_||_| \\__,_| \\__|\n");
-                        system("pause");
+            case 5 :
+                if (partie_en_cour == 1) {
+                    options();
+                    choix = 0;
+                } else {
+                    printf("\n\n\n\t\t\tVeut tu vraiment quitter ? 1->NON / 2->OUI");
+                    fflush(stdin);
+                    scanf("%d", &exit_);
+                    if (exit_ == 2) {
+                        goToMenu();
+                    } else if (exit_ == 1) {
+                        evenement = 4;
+                        logs();
+                        system("exit");
                     }
-                } else if (choix != 5) {
+                }
+                break;
+            case 6 :
+                if (partie_en_cour == 1) {
+                    printf("\n\n\n\t\t\tVeut tu vraiment quitter ? 1->NON / 2->OUI");
+                    fflush(stdin);
+                    scanf("%d", &exit_);
+                    if (exit_ == 2) {
+                        goToMenu();
+                    } else if (exit_ == 1) {
+                        evenement = 4;
+                        logs();
+                        system("exit");
+                    }
+                } else {
+                    printf("\n\t\t");
+                    printf("UNKNOW VALUE!!");
+                    printf("\n\t\t");
+                    fflush(stdin);
+                    system("pause");
+                }
+                break;
+            default:
+                if (choix == 7) {
+                    printf("              _         _   \n"
+                           "  ___   __ _ | | _   _ | |_ \n"
+                           " / __| / _` || || | | || __|\n"
+                           " \\__ \\| (_| || || |_| || |_ \n"
+                           " |___/ \\__,_||_| \\__,_| \\__|\n");
+                    system("pause");
+                } else {
                     printf("\n\t\t");
                     printf("UNKNOW VALUE!!");
                     printf("\n\t\t");
@@ -488,16 +552,7 @@ int goToMenu() {//affiche le menu
                     system("pause");
                 }
         }
-    } while (choix != 5);
-    printf("\n\n\n\t\t\tVeut tu vraiment quitter ? 1->NON / 2->OUI");
-    scanf("%d", &exit_);
-    if (exit_ == 2) {
-        goToMenu();
-    } else if (exit_ == 1) {
-        evenement = 4;
-        logs();
-        system("exit");
-    }
+    } while (choix != 0);
 }
 
 void retourMenu() {// Définition de la fonction (code) elle sert a quitter une partie en cour
@@ -505,8 +560,12 @@ void retourMenu() {// Définition de la fonction (code) elle sert a quitter une 
     k = getch();
     if (k == 27) {
         printf("Veux tu vraiment retourner au menu? \nla Partie sera sauvegarder! \n1->Oui /2->Non");
+        fflush(stdin);
         scanf("%d", &choix_quitter);
-        if (choix_quitter == 1) goToMenu(), partie_en_cour = 1;
+        if (choix_quitter == 1) {
+            partie_en_cour = 1;
+            goToMenu();
+        }
     }
 }
 
