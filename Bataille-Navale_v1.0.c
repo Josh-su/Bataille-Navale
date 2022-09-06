@@ -1,9 +1,9 @@
 /*
 * Auteur:      Joshua Surico
-* Date :       02.04.2021
+* Date :       06.09.2022
 * Titre:       bataille navale
 * Description: Ce programme est le jeu de la bataille navale mais pour 1 joueur
-* Version:     1.0
+* Version:     1.1
 */
 
 #include <stdio.h>
@@ -14,11 +14,11 @@
 
 #define TAILLE_MAX 1000
 
-int NbTire, x, y, axeX, axeY, ToucheMax, touche, rate_, exit_, choix, BateauA, BateauB, BateauC, BateauD, BateauE, evenement, choix_option, choix_couleur = 1, NbScoreAffiche, couleur, couleur_grille, choix_quitter, partie_en_cour = 0;
+int alt = 0, NbTire, x, y, axeX, axeY, ToucheMax, touche, rate_, exit_, choix, BateauA, BateauB, BateauC, BateauD, BateauE, evenement, choix_option, choix_couleur = 1, NbScoreAffiche, couleur, couleur_grille, choix_quitter, partie_en_cour = 0;
 
 void retourMenu(), play(), color(int front,int back), couleur_actuelle(), definir_grille(), logs(), goToMenu(), enreg_scores(), affi_scores(), enreg_pseudo(), clearGrid(), drawGrid(), Change(), toucher(), Fin(), rules(), date_heure(), changer_couleur(), options(), AskColumn(), AskLine(), fullscreen();//declaration des fonctions
 
-char lettre, Pseudo[300];
+char lettre = ' ', Pseudo[300];
 
 char tableBateaux[10][10] = //cette table represente les bateaux sur la grille
         {
@@ -103,7 +103,8 @@ void couleur_actuelle() {
     }
 }
 
-void definir_grille() {//choisi aleatoirement une des 5 grilles
+//choisi aleatoirement une des 5 grilles
+void definir_grille() {
     srand(time(NULL));
     int r;
     r = rand() % 5;
@@ -140,6 +141,7 @@ void definir_grille() {//choisi aleatoirement une des 5 grilles
     }
 }
 
+//écrit les différents logs
 void logs() {
     SYSTEMTIME t;
     GetLocalTime(&t);
@@ -164,7 +166,8 @@ void logs() {
     }
 }
 
-void enreg_scores() {//enregistre les scores
+//enregistre les scores
+void enreg_scores() {
     FILE *fichier = NULL;
     fichier = fopen("../LogsScores/Scores.txt", "r+");
     if (fichier != NULL) {
@@ -174,7 +177,8 @@ void enreg_scores() {//enregistre les scores
     }
 }
 
-void affi_scores() {//affiche les 5 derniers scores
+//affiche les 5 derniers scores
+void affi_scores() {
     system("cls");
     FILE *fichier = NULL;
     char chaine[TAILLE_MAX] = "5";
@@ -198,13 +202,15 @@ void affi_scores() {//affiche les 5 derniers scores
     system("pause");
 }
 
-void enreg_pseudo() {//enregistre le pseudo
+//enregistre le pseudo
+void enreg_pseudo() {
     printf("inscrit ton pseudo : ");
     fflush(stdin);
     scanf("%s", &Pseudo);
 }
 
-void clearGrid() {//réinitialiser la grille et les variables
+//réinitialiser la grille et les variables
+void clearGrid() {
     for (x = 0; x < 10; x++) {
         for (y = 0; y < 10; y++) {
             tableencour[x][y] = 0;
@@ -213,7 +219,8 @@ void clearGrid() {//réinitialiser la grille et les variables
     axeX = -1, axeY = -1, NbTire = 0, ToucheMax = 0, BateauA = 2, BateauB = 3, BateauC = 3, BateauD = 4, BateauE = 5, couleur_grille = 0;
 }
 
-void drawGrid() {//affiche toute la grille
+//affiche toute la grille
+void drawGrid() {
     rate_ = 0;
     touche = 0;
     couleur_grille = 1;
@@ -268,7 +275,8 @@ void drawGrid() {//affiche toute la grille
     }
 }
 
-void Change() {//defini la variable 'axeX' par rapport a la variable 'lettre'
+//defini la variable 'axeX' par rapport a la variable 'lettre'
+void Change() {
     if (lettre == 'A' || lettre == 'a') axeX = 0;
     if (lettre == 'B' || lettre == 'b') axeX = 1;
     if (lettre == 'C' || lettre == 'c') axeX = 2;
@@ -279,8 +287,10 @@ void Change() {//defini la variable 'axeX' par rapport a la variable 'lettre'
     if (lettre == 'H' || lettre == 'h') axeX = 7;
     if (lettre == 'I' || lettre == 'i') axeX = 8;
     if (lettre == 'J' || lettre == 'j') axeX = 9;
+    lettre = ' ';
 }
 
+//Gère la vie des bateaux
 void healthShip() {
     if (tableBateaux[axeY][axeX] == 'A' && BateauA != 0) BateauA--;
     if (tableBateaux[axeY][axeX] == 'B' && BateauB != 0) BateauB--;
@@ -289,6 +299,7 @@ void healthShip() {
     if (tableBateaux[axeY][axeX] == 'E' && BateauE != 0) BateauE--;
 }
 
+//Vérifie si la case sélectionner est touché/coulé/raté/déjàTirer
 void toucher() {
     if (touche == 1 && tableencour[axeY][axeX] != 2) {
         if (BateauA == 0 && tableBateaux[axeY][axeX] == 'A' || BateauB == 0 && tableBateaux[axeY][axeX] == 'B' ||
@@ -311,7 +322,8 @@ void toucher() {
     }
 }
 
-void Fin() {//affiche le pseudo de la personne qui gagner et en combien de fois elle a tire pour finir
+//affiche le pseudo de la personne qui gagner et en combien de fois elle a tire pour finir
+void Fin() {
     printf("\n\t╔═════════════════════════════════════════════════╗");
     printf("\n\t   BRAVO %s tu as gagner en %d tires !!", Pseudo, NbTire);//affiche combien de fois tu a tire pour finir
     printf("\n\t╚═════════════════════════════════════════════════╝\n\t   ");
@@ -321,7 +333,8 @@ void Fin() {//affiche le pseudo de la personne qui gagner et en combien de fois 
     enreg_scores();
 }
 
-void rules() {//affiche les regle du jeu
+//affiche les régles du jeu
+void rules() {
     system("cls");
     printf("\n       RÈGLES\n\n");
     printf("       Votre flotte a 5 bateaux qui sont les suivant:\n");
@@ -340,13 +353,15 @@ void rules() {//affiche les regle du jeu
     system("pause");
 }
 
-void date_heure() {//sa vas chercher le jour, le mois, l'année, l'heure, la minute et la seconde actuelle et vas l'afficher
+//la fonction va chercher le jour, le mois, l'année, l'heure, la minute et la seconde actuelle et vas l'afficher
+void date_heure() {
     SYSTEMTIME t;
     GetLocalTime(&t);
     printf("\n %d.%d.%d  %d:%d:%d \n\n ", t.wDay, t.wMonth, t.wYear, t.wHour, t.wMinute, t.wSecond);
     system("pause");
 }
 
+//affiche le menu pour changer la couleur du texte
 void changer_couleur() {
     do {
         system("cls");
@@ -369,6 +384,7 @@ void changer_couleur() {
     } while (choix_couleur != 9);
 }
 
+//affiche le menu des options
 void options() {
     do {
         system("cls");
@@ -405,21 +421,30 @@ void options() {
     } while (choix_option != 3);
 }
 
+//demande la coordonee horizental
 void AskColumn() {
-    printf("\tVeuilez choisir un colonne (A-J) : ");//demande la coordonee horizental
+    printf("\tVeuilez choisir un colonne (A-J) : ");
     fflush(stdin);
-    scanf("%c", &lettre);
+    alt = 0;
+    do {
+        scanf("%c", &lettre);
+        if (GetAsyncKeyState(VK_MENU) & 0x8000){
+            alt = 1;
+        }
+    }while(alt == 0 & lettre == ' ');
     Change();
 }
 
+//demande la coordonee vertical
 void AskLine() {
-    printf("\tveuillez choisir une ligne (1-10) : ");//demande la coordonee vertical
+    printf("\tveuillez choisir une ligne (1-10) : ");
     fflush(stdin);
     scanf("%d", &axeY);
     axeY = axeY - 1;
 }
 
-void play() {//demande les coordonee et affiche si on a touche ou rater un bateau
+//demande les coordonee et affiche si on a touche ou rater un bateau
+void play() {
     if (partie_en_cour != 1){
         clearGrid();
     }
@@ -431,7 +456,6 @@ void play() {//demande les coordonee et affiche si on a touche ou rater un batea
         healthShip();
         toucher();
         if (ToucheMax != 17) {//--> si pas toute les case avec un bateau on ete touche
-            retourMenu();
             AskColumn();
             if (axeX >= 10)
                 AskColumn();//verifie que la donnée enregistré soit bien un numero plus petit que 10 sinon redemander
@@ -496,7 +520,11 @@ void goToMenu() {//affiche le menu
                 choix = 0;
                 break;
             case 4 :
-                options();
+                if (partie_en_cour == 1) {
+                    rules();
+                }else{
+                    options();
+                }
                 choix = 0;
                 break;
             case 5 :
@@ -556,7 +584,7 @@ void goToMenu() {//affiche le menu
 }
 
 void retourMenu() {// Définition de la fonction (code) elle sert a quitter une partie en cour
-    char k;
+    /**char k;
     k = getch();
     if (k == 27) {
         printf("Veux tu vraiment retourner au menu? \nla Partie sera sauvegarder! \n1->Oui /2->Non");
@@ -566,10 +594,14 @@ void retourMenu() {// Définition de la fonction (code) elle sert a quitter une 
             partie_en_cour = 1;
             goToMenu();
         }
+    }**/
+    if (GetAsyncKeyState(VK_MENU) & 0x8000) {
+        printf("Alt pressed, thank you.\n");
     }
 }
 
-void fullscreen() {//Cela met la fenetre en plein ecran
+//Cela met la fenetre en plein ecran
+void fullscreen() {
     keybd_event(VK_MENU, 0x38, 0, 0);
     keybd_event(VK_RETURN, 0x1c, 0, 0);
     keybd_event(VK_RETURN, 0x1c, KEYEVENTF_KEYUP, 0);
