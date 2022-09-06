@@ -16,7 +16,8 @@
 
 int alt = 0, NbTire, x, y, axeX, axeY, ToucheMax, touche, rate_, exit_, choix, BateauA, BateauB, BateauC, BateauD, BateauE, evenement, choix_option, choix_couleur = 1, NbScoreAffiche, couleur, couleur_grille, choix_quitter, partie_en_cour = 0;
 
-void retourMenu(), play(), color(int front,int back), couleur_actuelle(), definir_grille(), logs(), goToMenu(), enreg_scores(), affi_scores(), enreg_pseudo(), clearGrid(), drawGrid(), Change(), toucher(), Fin(), rules(), date_heure(), changer_couleur(), options(), AskColumn(), AskLine(), fullscreen();//declaration des fonctions
+void retourMenu(), play(), color(int front,
+                                 int back), couleur_actuelle(), definir_grille(), logs(), goToMenu(), enreg_scores(), affi_scores(), enreg_pseudo(), clearGrid(), drawGrid(), Change(), toucher(), Fin(), rules(), date_heure(), changer_couleur(), options(), AskColumn(), AskLine(), fullscreen();//declaration des fonctions
 
 char lettre = ' ', Pseudo[300];
 
@@ -427,11 +428,12 @@ void AskColumn() {
     fflush(stdin);
     alt = 0;
     do {
-        scanf("%c", &lettre);
-        if (GetAsyncKeyState(VK_MENU) & 0x8000){
+        if (GetAsyncKeyState(0x41)) {
             alt = 1;
         }
-    }while(alt == 0 & lettre == ' ');
+    } while (alt == 0 );
+    scanf("%c", &lettre);
+    if (alt == 1) retourMenu();
     Change();
 }
 
@@ -445,7 +447,7 @@ void AskLine() {
 
 //demande les coordonee et affiche si on a touche ou rater un bateau
 void play() {
-    if (partie_en_cour != 1){
+    if (partie_en_cour != 1) {
         clearGrid();
     }
     definir_grille();
@@ -522,7 +524,7 @@ void goToMenu() {//affiche le menu
             case 4 :
                 if (partie_en_cour == 1) {
                     rules();
-                }else{
+                } else {
                     options();
                 }
                 choix = 0;
@@ -595,9 +597,8 @@ void retourMenu() {// Définition de la fonction (code) elle sert a quitter une 
             goToMenu();
         }
     }**/
-    if (GetAsyncKeyState(VK_MENU) & 0x8000) {
-        printf("Alt pressed, thank you.\n");
-    }
+    printf("Alt pressed, thank you.\n");
+
 }
 
 //Cela met la fenetre en plein ecran

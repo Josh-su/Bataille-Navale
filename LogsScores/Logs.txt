@@ -341,3 +341,14 @@ le programme a ete lance le 6.9.2022 a 21:27:13
 moi14.4 a lancer une partie le 6.9.2022 a 21:27:20 
 le programme a ete lance le 6.9.2022 a 21:29:39 
 moi14.5 a lancer une partie le 6.9.2022 a 21:29:45 
+le programme a ete lance le 6.9.2022 a 21:50:20 
+moi14.6 a lancer une partie le 6.9.2022 a 21:50:27 
+le programme a ete lance le 6.9.2022 a 21:53:44 
+moi14.7 a lancer une partie le 6.9.2022 a 21:53:50 
+moi14.7 a fini une partie le 6.9.2022 a 21:58:33 et a gagner en 50 tires
+le programme a ete lance le 6.9.2022 a 21:58:41 
+le programme a ete lance le 6.9.2022 a 22:3:21 
+le programme a ete lance le 6.9.2022 a 22:3:32 
+moi14.8 a lancer une partie le 6.9.2022 a 22:3:58 
+le programme a ete lance le 6.9.2022 a 22:5:30 
+moi14.9 a lancer une partie le 6.9.2022 a 22:5:39 
