@@ -1,4 +1,5 @@
-moi14.7 50
+
+tera 52
 ga_kring_de_la_mort_ 104
 moi13.0 25
 moi12.2 29

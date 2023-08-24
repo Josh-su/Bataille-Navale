@@ -352,3 +352,45 @@ le programme a ete lance le 6.9.2022 a 22:3:32
 moi14.8 a lancer une partie le 6.9.2022 a 22:3:58 
 le programme a ete lance le 6.9.2022 a 22:5:30 
 moi14.9 a lancer une partie le 6.9.2022 a 22:5:39 
+le programme a ete lance le 27.12.2022 a 22:51:57 
+le programme a ete lance le 1.1.2023 a 11:32:20 
+le programme a ete lance le 1.1.2023 a 11:32:54 
+le programme a ete lance le 1.1.2023 a 11:33:10 
+le programme a ete lance le 1.1.2023 a 11:33:19 
+moi14.8 a lancer une partie le 1.1.2023 a 11:33:26 
+moi14.8 a fini une partie le 1.1.2023 a 11:35:20 et a gagner en 31 tires
+le programme a ete lance le 1.1.2023 a 11:51:33 
+le programme a ete lance le 1.1.2023 a 11:51:53 
+ a fermer le programme le 1.1.2023 a 11:52:4 
+le programme a ete lance le 1.1.2023 a 11:56:30 
+le programme a ete lance le 1.1.2023 a 11:58:28 
+le programme a ete lance le 1.1.2023 a 11:58:47 
+le programme a ete lance le 1.1.2023 a 12:0:53 
+le programme a ete lance le 1.1.2023 a 12:1:48 
+le programme a ete lance le 1.1.2023 a 12:2:27 
+le programme a ete lance le 1.1.2023 a 12:2:56 
+le programme a ete lance le 1.1.2023 a 12:7:35 
+le programme a ete lance le 1.1.2023 a 12:8:47 
+le programme a ete lance le 1.1.2023 a 12:13:1 
+le programme a ete lance le 1.1.2023 a 12:13:37 
+le programme a ete lance le 1.1.2023 a 12:16:3 
+le programme a ete lance le 1.1.2023 a 12:16:50 
+le programme a ete lance le 1.1.2023 a 12:19:53 
+ a fermer le programme le 1.1.2023 a 12:20:0 
+le programme a ete lance le 1.1.2023 a 12:20:5 
+le programme a ete lance le 1.1.2023 a 12:20:42 
+ a fermer le programme le 1.1.2023 a 12:20:51 
+le programme a ete lance le 1.1.2023 a 12:20:54 
+le programme a ete lance le 1.1.2023 a 12:26:48 
+ a fermer le programme le 1.1.2023 a 12:26:51 
+le programme a ete lance le 1.1.2023 a 12:33:58 
+le programme a été fermé le 1.1.2023 a 12:34:3 
+le programme a ete lance le 1.1.2023 a 12:34:27 
+moi14.9 a lancer une partie le 1.1.2023 a 12:34:34 
+moi14.9 a fini une partie le 1.1.2023 a 12:37:47 et a gagner en 43 tires
+le programme a été fermé le 1.1.2023 a 12:38:6 
+le programme a été fermé le 1.1.2023 a 12:38:10 
+le programme a ete lance le 1.1.2023 a 12:41:44 
+tera a lancer une partie le 1.1.2023 a 12:42:5 
+tera a fini une partie le 1.1.2023 a 12:48:42 et a gagner en 52 tires
+le programme a été fermé le 1.1.2023 a 12:48:45 
