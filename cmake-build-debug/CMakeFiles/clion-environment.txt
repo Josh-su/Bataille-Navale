@@ -1,4 +1,4 @@
-ToolSet: w64 6.0 (local)@C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32
+ToolSet: 11.0 w64 (local)@C:\Users\ph73tll\AppData\Local\Programs\CLion\bin\mingw
 Options: 
 
 Options:

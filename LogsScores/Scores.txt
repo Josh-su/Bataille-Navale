@@ -1,6 +1,5 @@
-
-tera 52
-ga_kring_de_la_mort_ 104
+littleNonce 62
+ing_de_la_mort_ 104
 moi13.0 25
 moi12.2 29
 moi12.1 21

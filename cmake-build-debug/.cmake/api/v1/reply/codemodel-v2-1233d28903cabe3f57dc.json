@@ -35,7 +35,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Bataille_Navale::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Bataille_Navale-Debug-483a3f08f65ce453984c.json",
+					"jsonFile" : "target-Bataille_Navale-Debug-798a604bed779d8b77a9.json",
 					"name" : "Bataille_Navale",
 					"projectIndex" : 0
 				}
@@ -45,12 +45,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/SandBox/Bataille_Finale/Bataille-Navale/cmake-build-debug",
-		"source" : "C:/SandBox/Bataille_Finale/Bataille-Navale"
+		"build" : "C:/Users/ph73tll/OneDrive - Education Vaud/Documents/GitHub/Bataille-Navale/cmake-build-debug",
+		"source" : "C:/Users/ph73tll/OneDrive - Education Vaud/Documents/GitHub/Bataille-Navale"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 3
+		"minor" : 6
 	}
 }

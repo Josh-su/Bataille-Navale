@@ -394,3 +394,17 @@ le programme a ete lance le 1.1.2023 a 12:41:44
 tera a lancer une partie le 1.1.2023 a 12:42:5 
 tera a fini une partie le 1.1.2023 a 12:48:42 et a gagner en 52 tires
 le programme a été fermé le 1.1.2023 a 12:48:45 
+le programme a ete lance le 6.3.2024 a 10:52:55 
+le programme a ete lance le 6.3.2024 a 10:54:47 
+test1.0 a lancer une partie le 6.3.2024 a 10:55:33 
+test1.0 a fini une partie le 6.3.2024 a 11:0:1 et a gagner en 65 tires
+test1.0 a fermer le programme le 6.3.2024 a 11:0:54 
+le programme a ete lance le 6.3.2024 a 11:7:54 
+le programme a ete lance le 6.3.2024 a 11:9:47 
+Joshua a lancer une partie le 6.3.2024 a 11:10:19 
+Joshua a fini une partie le 6.3.2024 a 11:14:57 et a gagner en 44 tires
+BigNonce a lancer une partie le 6.3.2024 a 11:15:24 
+BigNonce a fini une partie le 6.3.2024 a 11:18:25 et a gagner en 39 tires
+littleNonce a lancer une partie le 6.3.2024 a 11:18:55 
+littleNonce a fini une partie le 6.3.2024 a 11:24:5 et a gagner en 62 tires
+le programme a ete lance le 6.3.2024 a 11:24:15 
