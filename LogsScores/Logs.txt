@@ -408,3 +408,5 @@ BigNonce a fini une partie le 6.3.2024 a 11:18:25 et a gagner en 39 tires
 littleNonce a lancer une partie le 6.3.2024 a 11:18:55 
 littleNonce a fini une partie le 6.3.2024 a 11:24:5 et a gagner en 62 tires
 le programme a ete lance le 6.3.2024 a 11:24:15 
+le programme a ete lance le 21.5.2024 a 8:30:7 
+moi a lancer une partie le 21.5.2024 a 8:30:13 

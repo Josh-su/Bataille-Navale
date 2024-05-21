@@ -20,6 +20,6 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 -- Check for working C compiler: C:/Users/ph73tll/AppData/Local/Programs/CLion/bin/mingw/bin/gcc.exe - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
--- Configuring done (0.8s)
+-- Configuring done (3.1s)
 -- Generating done (0.0s)
 -- Build files have been written to: C:/Users/ph73tll/OneDrive - Education Vaud/Documents/GitHub/Bataille-Navale/cmake-build-debug
