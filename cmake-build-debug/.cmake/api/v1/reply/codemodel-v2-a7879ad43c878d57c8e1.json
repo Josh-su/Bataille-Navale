@@ -45,12 +45,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/ph73tll/OneDrive - Education Vaud/Documents/GitHub/Bataille-Navale/cmake-build-debug",
-		"source" : "C:/Users/ph73tll/OneDrive - Education Vaud/Documents/GitHub/Bataille-Navale"
+		"build" : "C:/GitHub/Josh-su/Bataille-Navale/cmake-build-debug",
+		"source" : "C:/GitHub/Josh-su/Bataille-Navale"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 6
+		"minor" : 7
 	}
 }

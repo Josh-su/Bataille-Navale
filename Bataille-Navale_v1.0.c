@@ -2,7 +2,7 @@
 * Auteur:      Joshua Surico
 * Date :       01.01.2023
 * Titre:       bataille navale
-* Description: Ce programme est le jeu de la bataille navale mais pour 1 joueur
+* Description: Ce programme est le jeu de la bataille navale, mais pour 1 joueur
 * Version:     1.1
 */
 
@@ -19,9 +19,9 @@ void play(), color(int front,int back), couleur_actuelle(), definir_grille(), lo
 
 char lettre = ' ', Pseudo[300] = "";
 
-boolean _pseudo = FALSE;
+boolean isPseudoSet = FALSE;
 
-char tableBateaux[10][10] = //cette table représente les bateaux sur la grille
+char tableBateaux[10][10] = //cette table représente les bateaux sur la grille.
         {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -34,7 +34,7 @@ char tableBateaux[10][10] = //cette table représente les bateaux sur la grille
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
         };
-int tableEnCour[10][10] =  //cette table sert à sauvegarder les case sur les quelle on a tiré
+int tableEnCour[10][10] =  //cette table sert à sauvegarder les case sur les quelle, on a tiré
         {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -89,7 +89,7 @@ void couleur_actuelle() {
         default:
             if (choix_couleur != 9) {
                 printf("\n\t\t");
-                printf("UNKNOW VALUE!!");
+                printf("UNKNOWN VALUE!!");
                 printf("\n\t\t");
                 fflush(stdin);
                 system("pause");
@@ -112,19 +112,19 @@ void definir_grille() {
     FILE *fichier = NULL;
     switch (r) {
         case 0:
-            fichier = fopen("../grilles/grille0.txt", "r");
+            fichier = fopen("Grilles/grille0.txt", "r");
             break;
         case 1:
-            fichier = fopen("../grilles/grille1.txt", "r");
+            fichier = fopen("Grilles/grille1.txt", "r");
             break;
         case 2:
-            fichier = fopen("../grilles/grille2.txt", "r");
+            fichier = fopen("Grilles/grille2.txt", "r");
             break;
         case 3:
-            fichier = fopen("../grilles/grille3.txt", "r");
+            fichier = fopen("Grilles/grille3.txt", "r");
             break;
         case 4:
-            fichier = fopen("../grilles/grille4.txt", "r");
+            fichier = fopen("Grilles/grille4.txt", "r");
             break;
         default:
             break;
@@ -147,7 +147,7 @@ void logs() {
     SYSTEMTIME t;
     GetLocalTime(&t);
     FILE *fichier = NULL;
-    fichier = fopen("../LogsScores/Logs.txt", "a");
+    fichier = fopen("LogsScores/Logs.txt", "a");
     fseek(fichier, 2, SEEK_END);
     if (fichier != NULL) {
         if (evenement == 1)
@@ -160,7 +160,7 @@ void logs() {
             fprintf(fichier, "%s a fini une partie le %d.%d.%d a %d:%d:%d et a gagner en %d tires\n", Pseudo, t.wDay,
                     t.wMonth, t.wYear, t.wHour, t.wMinute, t.wSecond, NbTire);
         else if (evenement == 4){
-            if(_pseudo){
+            if(isPseudoSet){
                 fprintf(fichier, "%s a fermer le programme le %d.%d.%d a %d:%d:%d \n", Pseudo, t.wDay, t.wMonth, t.wYear,
                         t.wHour, t.wMinute, t.wSecond);
             }else{
@@ -198,7 +198,7 @@ void affi_scores() {
                "   \\ V /| (_) || || (__ | |  | ||  __/\\__ \\   ___) |  | (_| ||  __/| |   | | | || ||  __/| |   \\__ \\ \\__ \\| (__| (_) || |  |  __/\\__ \\\n"
                "    \\_/  \\___/ |_| \\___||_|  |_| \\___||___/  |____/    \\__,_| \\___||_|   |_| |_||_| \\___||_|   |___/ |___/ \\___|\\___/ |_|   \\___||___/\n"
                "                                                            \n\n\n");
-        while (fgets(chaine, TAILLE_MAX, fichier) != NULL) // On lit le fichier tant qu'on ne reçoit pas d'erreur (NULL)
+        while (fgets(chaine, TAILLE_MAX, fichier) != NULL) // On lit le fichier tant qu'on ne reçoit pas d'erreur (NULL).
         {
             printf("\t\t-  %s", chaine); // On affiche la chaîne qu'on vient de lire
             NbScoreAffiche++;
@@ -215,7 +215,7 @@ void enreg_pseudo() {
     printf("inscrit ton pseudo : ");
     fflush(stdin);
     scanf("%s", &Pseudo);
-    _pseudo = TRUE;
+    isPseudoSet = TRUE;
 }
 
 //réinitialiser la grille et les variables
@@ -238,7 +238,7 @@ void drawGrid() {
     printf("   │  A  │  B  │  C  │  D  │  E  │  F  │  G  │  H  │  I  │  J  │\n");
     printf("┌──┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤\n");//affiche la 1er ligne
     for (x = 0; x < 10; x++) {
-        //print les numeros a gauche
+        //print les numéros à gauche
         if (x != 9) {
             printf("│%x │", x + 1);
         } else {
@@ -246,18 +246,18 @@ void drawGrid() {
         }
         for (y = 0; y < 10; y++) {
             if (axeY == x && axeX == y) {
-                if (tableEnCour[x][y] != 2) tableEnCour[x][y] = 1;//sauvegarde la case touché
+                if (tableEnCour[x][y] != 2) tableEnCour[x][y] = 1;//sauvegarde la case touchée
                 if (tableBateaux[x][y] == 'A' || tableBateaux[x][y] == 'B' || tableBateaux[x][y] == 'C' ||
-                    tableBateaux[x][y] == 'D' || tableBateaux[x][y] == 'E')//on verifie si il y a un bateau
-                    touche++;// si oui un ajoute 1 a la variable 'touche' si non on ajoute 1 a la variable 'rate_'
+                    tableBateaux[x][y] == 'D' || tableBateaux[x][y] == 'E')//on vérifie si il y a un bateau
+                    touche++;// si oui un ajouté 1 à la variable 'touche' si non, on ajoute 1 à la variable 'rate_'
                 else rate_++;
             }
             if (tableEnCour[x][y] == 1 || tableEnCour[x][y] == 2) {
                 if (tableBateaux[x][y] == 'A' || tableBateaux[x][y] == 'B' || tableBateaux[x][y] == 'C' ||
                     tableBateaux[x][y] == 'D' ||
-                    tableBateaux[x][y] == 'E') {//verifie si il y a un bateau dans les cases ou on a deja tirer dessus
+                    tableBateaux[x][y] == 'E') {//verifi s'il y a un bateau dans les cases ou on a deja tirer dessus
                     color(15, 4);
-                    printf("  !  ");//si oui on affiche un point d'exlamation en rouge
+                    printf("  !  ");//si oui, on affiche un point d'exclamation en rouge
                     couleur_grille = 1;
                     couleur_actuelle();
                     printf("│");
@@ -270,7 +270,7 @@ void drawGrid() {
                 }
             } else {
                 color(15, 1);
-                printf("  ~  ");//si la case n'a pas ete tirer dessus on affiche le signe environ en bleu
+                printf("  ~  ");//si la case n'a pas ete tirer dessus, on affiche le signe environ en bleu
                 couleur_grille = 1;
                 couleur_actuelle();
                 printf("│");
@@ -284,7 +284,7 @@ void drawGrid() {
     }
 }
 
-//defini la variable 'axeX' par rapport a la variable 'lettre'
+//défini la variable 'axeX' par rapport à la variable 'lettre'
 void Change() {
     if (lettre == 'A' || lettre == 'a') axeX = 0;
     if (lettre == 'B' || lettre == 'b') axeX = 1;
@@ -308,7 +308,7 @@ void healthShip() {
     if (tableBateaux[axeY][axeX] == 'E' && BateauE != 0) BateauE--;
 }
 
-//Vérifie si la case sélectionner est touché/coulé/raté/déjàTirer
+//Vérifie si la case sélectionnée est touché/coulé/raté/déjàTirer
 void toucher() {
     if (touche == 1 && tableEnCour[axeY][axeX] != 2) {
         if (BateauA == 0 && tableBateaux[axeY][axeX] == 'A' || BateauB == 0 && tableBateaux[axeY][axeX] == 'B' ||
@@ -331,10 +331,10 @@ void toucher() {
     }
 }
 
-//affiche le pseudo de la personne qui gagner et en combien de fois elle a tire pour finir
+//affiche le pseudo de la personne qui gagner et en combien de fois, elle a tiré pour finir
 void Fin() {
     printf("\n\t╔═════════════════════════════════════════════════╗");
-    printf("\n\t   BRAVO %s tu as gagner en %d tires !!", Pseudo, NbTire);//affiche combien de fois tu a tire pour finir
+    printf("\n\t   BRAVO %s tu as gagner en %d tires !!", Pseudo, NbTire);//affiche combien de fois, tu as tiré pour finir
     printf("\n\t╚═════════════════════════════════════════════════╝\n\t   ");
     system("pause");
     evenement = 3;
@@ -343,7 +343,7 @@ void Fin() {
     goToMenu();
 }
 
-//affiche les régles du jeu
+//affiche les règles du jeu
 void rules() {
     system("cls");
     printf("\n       RÈGLES\n\n");
@@ -354,7 +354,7 @@ void rules() {
     printf("       -1 sous-marin(3 cases)\n");
     printf("       -1 torpilleur (2 cases)\n");
     printf("       Les bateaux ne sont pas colles entre eux.\n");
-    printf("       La grille est numerotée de 1 a 10 verticalement\n");
+    printf("       La grille est numérotée de 1 a 10 verticalement\n");
     printf("       et de A a J horizontalement. Vous allez \"tirer\"\n");
     printf("       sur une case de l'adversaire: exemple, B.3. le but est\n");
     printf("       donc de couler les bateaux adverses.\n");
@@ -364,7 +364,7 @@ void rules() {
     goToMenu();
 }
 
-//la fonction va chercher le jour, le mois, l'année, l'heure, la minute et la seconde actuelle et vas l'afficher
+//la fonction va chercher le jour, le mois, l'année, l'heure, la minute et la seconde actuelle et va l'afficher
 void date_heure() {
     SYSTEMTIME t;
     GetLocalTime(&t);
@@ -422,7 +422,7 @@ void options() {
             default:
                 if (choix_option != 3) {
                     printf("\n\t\t");
-                    printf("UNKNOW VALUE!!");
+                    printf("UNKNOWN VALUE!!");
                     printf("\n\t\t");
                     fflush(stdin);
                     system("pause");
@@ -433,23 +433,23 @@ void options() {
     goToMenu();
 }
 
-//demande la coordonee horizental
+//demande la coordonnée horizontal
 void AskColumn() {
-    printf("\tVeuilez choisir un colonne (A-J) : ");
+    printf("\tVeuillez choisir un colonne (A-J) : ");
     fflush(stdin);
     scanf("%c", &lettre);
     Change();
 }
 
-//demande la coordonee vertical
+//demande la coordonnée vertical
 void AskLine() {
-    printf("\tveuillez choisir une ligne (1-10) : ");
+    printf("\tVeuillez choisir une ligne (1-10) : ");
     fflush(stdin);
     scanf("%d", &axeY);
     axeY = axeY - 1;
 }
 
-//demande les coordonnée et affiche si on a touche ou rater un bateau
+//Demande les coordonnées et affiche si on a touché ou manqué un bateau.
 void play() {
     clearGrid();
     definir_grille();
@@ -459,7 +459,7 @@ void play() {
         drawGrid();
         healthShip();
         toucher();
-        if (ToucheMax != 17) {//--> si pas toute les case avec un bateau ont été touche
+        if (ToucheMax != 17) {//→ si pas tous les case avec un bateau ont été touché
             AskColumn();
             if (axeX >= 10)
                 AskColumn();//vérifie que la donnée enregistrée soit bien un numéro plus petit que 10 sinon redemander
@@ -532,7 +532,7 @@ void goToMenu() {//affiche le menu
                     system("pause");
                 } else {
                     printf("\n\t\t");
-                    printf("UNKNOW VALUE!!");
+                    printf("UNKNOWN VALUE!!");
                     printf("\n\t\t");
                     fflush(stdin);
                     system("pause");
